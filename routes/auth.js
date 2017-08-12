@@ -10,6 +10,15 @@ const isAuthenticated = (req, res, next) => {
      return res.json({ })
 }
 
+//Helper function to whitelist attributes
+const userAttrs = (user) => {
+  const { _id, username, role } = user;
+  return { _id, username, role };
+}
+
+//Signin AND Signup
+return res.json(userAttrs(user))
+
 router.post('/signup', (req, res) => {
   let { email, password } = req.body;
   User.register(new User({username: email}), password, (err, user) => {
