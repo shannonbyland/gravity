@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Form, Button } from 'semantic-ui-react';
+import { Header, Form, Button, Container } from 'semantic-ui-react';
 import { authenticate } from '../actions/user';
 import { connect } from 'react-redux';
 
@@ -23,12 +23,12 @@ class Auth extends React.Component {
     let { title } = this.props;
     let { email, password } = this.state;
     return (
-      <div>
-        <Header as="h3">{title}</Header>
+      <Container text>
+        <Header as="h2" textAlign='center'>{title}</Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
             id="email"
-            label="email"
+            label="Email"
             required
             type="email"
             onChange={this.handleChange}
@@ -36,15 +36,15 @@ class Auth extends React.Component {
           />
           <Form.Input
             id="password"
-            label="password"
+            label="Password"
             required
             type="password"
             onChange={this.handleChange}
             value={password}
           />
-          <Button>Submit</Button>
+          <Button basic color='black' content='Login' />
         </Form>
-      </div>
+      </Container>
     )
   }
 }
