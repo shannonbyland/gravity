@@ -16,19 +16,16 @@ const userAttrs = (user) => {
   return { _id, username, role };
 }
 
-//Signin AND Signup
-return res.json(userAttrs(user))
 
 router.post('/signup', (req, res) => {
   let { email, password } = req.body;
   User.register(new User({username: email}), password, (err, user) => {
     if (err)
       return res.status(500).json(err);
-
     user.save( (err, user) => {
       if (err)
         return res.status(500).json(err);
-      return res.json(user)
+      return res.json(userAttrs(user))
     });
   });
 });
@@ -43,7 +40,7 @@ router.post('/signin', (req, res) => {
        return res.json(500, passwordErr.message)
 
      req.logIn(user, (err) => {
-       return res.json(user);
+       return res.json(userAttrs(user));
      })
    });
   });
